@@ -1,27 +1,24 @@
-# AlxPolly - Modern Polling Application
+# AlxPolly - Next.js Polling App
 
-A Next.js-based polling application that allows users to create, share, and vote on polls. Built with modern web technologies and a beautiful, responsive UI.
+A modern, real-time polling application built with Next.js 15, TypeScript, Tailwind CSS, and Supabase.
 
-## 🚀 Features
+## ✨ Features
 
-- **User Authentication**: Secure login and registration system using Supabase
-- **Poll Creation**: Easy-to-use interface for creating custom polls
-- **Voting System**: Support for single and multiple choice voting
-- **Real-time Results**: Live updates and beautiful visualizations
-- **Responsive Design**: Works seamlessly on all devices
-- **Modern UI**: Built with Shadcn components and Tailwind CSS
-- **Protected Routes**: Authentication-based route protection
+- **User Authentication** - Secure login/registration with Supabase Auth
+- **Poll Creation** - Create polls with multiple options, categories, and expiration dates
+- **Real-time Voting** - Vote on active polls with single or multiple choice options
+- **Dashboard** - View your polls, stats, and activity
+- **Responsive Design** - Beautiful UI that works on all devices
+- **Row Level Security** - Secure data access with Supabase RLS policies
 
-## 🛠️ Tech Stack
+## 🚀 Tech Stack
 
-- **Framework**: Next.js 15 with App Router
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS v4
-- **Components**: Shadcn/ui
-- **Icons**: Lucide React
-- **Authentication**: Supabase Auth
-- **Database**: Supabase (PostgreSQL)
-- **State Management**: React Context + Hooks
+- **Frontend**: Next.js 15 (App Router), TypeScript, Tailwind CSS v4
+- **UI Components**: Shadcn/ui components
+- **Backend**: Supabase (PostgreSQL, Auth, Real-time)
+- **Authentication**: Supabase Auth with JWT tokens
+- **Database**: PostgreSQL with Row Level Security (RLS)
+- **Styling**: Tailwind CSS with custom design system
 
 ## 📁 Project Structure
 
@@ -31,197 +28,238 @@ alx-polly/
 │   ├── auth/                     # Authentication pages
 │   │   ├── login/               # Login page
 │   │   └── register/            # Registration page
-│   ├── polls/                    # Poll-related pages
-│   │   ├── create/              # Poll creation page
+│   ├── polls/                   # Poll-related pages
+│   │   ├── create/              # Create new poll
 │   │   ├── [id]/                # Individual poll view
-│   │   └── page.tsx             # Polls listing page
-│   ├── dashboard/                # User dashboard (protected)
-│   ├── globals.css              # Global styles
-│   ├── layout.tsx               # Root layout with AuthProvider
-│   └── page.tsx                 # Home page
-├── components/                    # Reusable components
-│   ├── auth/                     # Authentication components
-│   │   ├── LoginForm.tsx        # Login form with Supabase
-│   │   ├── RegisterForm.tsx     # Registration form with Supabase
-│   │   └── ProtectedRoute.tsx   # Route protection component
-│   ├── polls/                    # Poll-related components
-│   │   └── PollCard.tsx         # Poll display card
-│   ├── forms/                    # Form components
-│   │   └── CreatePollForm.tsx   # Poll creation form
-│   ├── layout/                   # Layout components
-│   │   └── Navigation.tsx       # Main navigation with auth state
-│   └── ui/                      # Shadcn UI components
-├── contexts/                     # React Context providers
+│   │   └── page.tsx             # Browse all polls
+│   ├── dashboard/                # User dashboard
+│   ├── profile/                  # User profile management
+│   └── layout.tsx               # Root layout with navigation
+├── components/                   # Reusable UI components
+│   ├── auth/                    # Authentication components
+│   ├── polls/                   # Poll-related components
+│   ├── forms/                   # Form components
+│   ├── layout/                  # Layout components
+│   └── ui/                      # Shadcn/ui components
+├── contexts/                     # React contexts
 │   └── AuthContext.tsx          # Authentication context
-├── lib/                          # Utility libraries
-│   ├── supabase/                 # Supabase configuration
-│   │   ├── client.ts            # Browser client
-│   │   ├── server.ts            # Server client
-│   │   ├── middleware.ts        # Next.js middleware
-│   │   └── auth.ts              # Server auth utilities
-│   ├── types/                    # TypeScript type definitions
-│   │   ├── auth.ts              # Authentication types
-│   │   └── poll.ts              # Poll-related types
-│   ├── auth/                     # Authentication services
-│   │   └── authService.ts       # Legacy auth service (placeholder)
-│   ├── db/                       # Database services
-│   │   └── pollService.ts       # Poll service (placeholder)
-│   └── utils.ts                 # Utility functions
-├── middleware.ts                 # Next.js middleware for auth
-├── public/                       # Static assets
-├── package.json                  # Dependencies
-├── tsconfig.json                # TypeScript configuration
-├── env.example                  # Environment variables template
-└── README.md                    # Project documentation
+├── lib/                         # Utility libraries
+│   ├── supabase/                # Supabase client configuration
+│   ├── db/                      # Database services
+│   └── types/                   # TypeScript type definitions
+├── database/                    # Database schema and setup
+│   ├── schema.sql               # Complete database schema
+│   ├── setup.sql                # Quick setup script
+│   ├── test-data.sql            # Sample data for testing
+│   └── README.md                # Database setup guide
+└── public/                      # Static assets
 ```
 
-## 🚀 Getting Started
+## 🛠️ Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ 
-- npm or yarn
+- Node.js 18+ and npm
 - Supabase account and project
 
-### Supabase Setup
+### 1. Clone and Install
 
-1. **Create a Supabase Project**:
-   - Go to [supabase.com](https://supabase.com) and sign up
-   - Create a new project
-   - Note down your project URL and anon key
-
-2. **Configure Environment Variables**:
-   ```bash
-   # Copy the environment template
-   cp env.example .env.local
-   
-   # Edit .env.local with your Supabase credentials
-   NEXT_PUBLIC_SUPABASE_URL=your_project_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
-   ```
-
-3. **Database Setup** (Optional):
-   - Create a `profiles` table for user profiles
-   - Create a `polls` table for storing polls
-   - Set up Row Level Security (RLS) policies
-
-### Installation
-
-1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone <your-repo-url>
 cd alx-polly
-```
-
-2. Install dependencies:
-```bash
 npm install
 ```
 
-3. Set up environment variables (see Supabase Setup above)
+### 2. Set Up Supabase
 
-4. Run the development server:
+1. **Create a Supabase project** at [supabase.com](https://supabase.com)
+2. **Get your project credentials** from Settings → API
+3. **Copy environment variables**:
+
+```bash
+cp env.example .env.local
+```
+
+4. **Fill in your Supabase credentials** in `.env.local`:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+### 3. Set Up Database
+
+1. **Open Supabase Dashboard** → SQL Editor
+2. **Run the setup script**:
+
+```sql
+-- Copy and paste the contents of database/setup.sql
+-- This creates all tables, policies, and functions
+```
+
+3. **Verify setup** by checking Tables → Schema
+
+### 4. Run the Application
+
 ```bash
 npm run dev
 ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## 🔧 Development
+## 🗄️ Database Schema
+
+The app uses a robust PostgreSQL schema with:
+
+- **profiles** - User profile information
+- **polls** - Poll metadata and settings
+- **poll_options** - Individual poll options
+- **votes** - User votes on polls
+- **vote_options** - Which options were selected in each vote
+- **poll_shares** - Poll sharing analytics
+- **poll_views** - Poll view analytics
+
+### Key Features
+
+- **Row Level Security (RLS)** - Users can only access their own data
+- **Automatic triggers** - Vote counting and profile creation
+- **Foreign key constraints** - Data integrity
+- **Indexes** - Performance optimization
+
+## 🔐 Authentication Flow
+
+1. **Registration** - Users sign up with email/password
+2. **Profile Creation** - Automatic profile creation via database trigger
+3. **Login** - JWT-based authentication with Supabase
+4. **Protected Routes** - Middleware protects authenticated pages
+5. **Session Management** - Automatic session refresh and validation
+
+## 📊 Poll Creation & Management
+
+### Creating Polls
+
+1. **Navigate to** `/polls/create`
+2. **Fill out the form**:
+   - Title (required, min 3 characters)
+   - Description (optional)
+   - Poll options (minimum 2)
+   - Vote type (single/multiple choice)
+   - Category (optional)
+   - Expiration date (optional)
+   - Anonymous option
+3. **Submit** - Poll is created and stored in Supabase
+
+### Poll Features
+
+- **Multiple choice support** - Allow users to select multiple options
+- **Category organization** - Group polls by topic
+- **Expiration dates** - Set when polls automatically close
+- **Anonymous polls** - Hide author information
+- **Real-time updates** - Vote counts update automatically
+
+## 🎯 Voting System
+
+- **Single choice** - Users select one option
+- **Multiple choice** - Users can select multiple options
+- **Vote validation** - Prevents duplicate voting
+- **Real-time results** - Instant vote count updates
+
+## 🎨 UI Components
+
+Built with Shadcn/ui components:
+
+- **Forms** - Input, Textarea, Select, Checkbox
+- **Layout** - Card, Button, Badge, Progress
+- **Navigation** - Dropdown menus, responsive navigation
+- **Feedback** - Loading states, error messages, success confirmations
+
+## 🚦 Development
 
 ### Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-
-### Adding New Shadcn Components
-
 ```bash
-npx shadcn@latest add <component-name>
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+npm run type-check   # Run TypeScript type checking
 ```
 
-### Authentication Flow
+### Code Quality
 
-1. **User Registration**: Users sign up with email/password
-2. **Email Verification**: Supabase sends verification email
-3. **User Login**: Verified users can sign in
-4. **Protected Routes**: Dashboard and other private areas require authentication
-5. **Session Management**: Automatic session handling with cookies
+- **TypeScript** - Full type safety
+- **ESLint** - Code linting and formatting
+- **Prettier** - Code formatting
+- **Tailwind CSS** - Utility-first CSS framework
 
-### Project Structure Guidelines
+## 🔧 Configuration
 
-- **Components**: Place reusable components in appropriate subdirectories
-- **Types**: Define TypeScript interfaces in `lib/types/`
-- **Services**: Place API/database services in `lib/` subdirectories
-- **Pages**: Use Next.js App Router structure in `app/`
-- **Auth**: Use `useAuth()` hook for client components, `getCurrentUser()` for server components
+### Environment Variables
 
-## 🎯 Roadmap
+- `NEXT_PUBLIC_SUPABASE_URL` - Your Supabase project URL
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Public API key for client-side operations
 
-### Phase 1: Core Functionality ✅
-- [x] Project scaffolding
-- [x] Basic UI components
-- [x] Authentication forms
-- [x] Poll creation interface
-- [x] Poll display components
-- [x] Supabase authentication integration
-- [x] Protected routes
+### Supabase Settings
 
-### Phase 2: Backend Integration 🚧
-- [ ] Database setup (Supabase PostgreSQL)
-- [ ] Poll CRUD operations with Supabase
-- [ ] User profile management
-- [ ] Real-time subscriptions
+- **Authentication** - Email/password enabled
+- **Database** - PostgreSQL with RLS enabled
+- **Storage** - File uploads (if needed)
+- **Real-time** - WebSocket connections for live updates
 
-### Phase 3: Advanced Features 📋
-- [ ] Real-time voting updates
-- [ ] Advanced analytics
-- [ ] Social sharing
-- [ ] Mobile app
+## 🧪 Testing
 
-### Phase 4: Production Ready 🎯
-- [ ] Testing suite
-- [ ] Performance optimization
-- [ ] Security hardening
-- [ ] Deployment automation
+### Manual Testing
 
-## 🔐 Authentication Features
+1. **Create a user account** via registration
+2. **Create a test poll** with multiple options
+3. **Vote on the poll** from different accounts
+4. **Check dashboard** for user statistics
+5. **Verify RLS policies** by accessing data from different accounts
 
-- **Secure Registration**: Email/password with Supabase Auth
-- **Email Verification**: Required before first login
-- **Session Management**: Automatic cookie-based sessions
-- **Route Protection**: Middleware-based authentication
-- **User Context**: Global auth state management
-- **Protected Components**: `ProtectedRoute` wrapper for private content
+### Database Testing
+
+Use the `database/test-data.sql` file to create sample data after setting up your database.
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+1. **Connect your repository** to Vercel
+2. **Set environment variables** in Vercel dashboard
+3. **Deploy** - Automatic deployments on push
+
+### Other Platforms
+
+- **Netlify** - Similar to Vercel setup
+- **Railway** - Full-stack deployment
+- **Self-hosted** - Docker or traditional hosting
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+1. **Fork the repository**
+2. **Create a feature branch**
+3. **Make your changes**
+4. **Test thoroughly**
+5. **Submit a pull request**
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 
-## 🙏 Acknowledgments
+## 🆘 Troubleshooting
 
-- [Next.js](https://nextjs.org/) - React framework
-- [Supabase](https://supabase.com/) - Backend as a Service
-- [Shadcn/ui](https://ui.shadcn.com/) - Beautiful UI components
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
-- [Lucide](https://lucide.dev/) - Beautiful icons
+### Common Issues
 
-## 📞 Support
+1. **Database connection errors** - Check Supabase credentials and network
+2. **Authentication issues** - Verify Supabase Auth settings
+3. **RLS policy errors** - Check database policies and user permissions
+4. **Type errors** - Ensure all dependencies are installed
 
-For support and questions:
-- Create an issue in the repository
-- Contact the development team
-- Check the documentation
+### Getting Help
+
+- Check the [database README](./database/README.md) for setup issues
+- Review Supabase documentation for authentication problems
+- Open an issue for bugs or feature requests
 
 ---
 

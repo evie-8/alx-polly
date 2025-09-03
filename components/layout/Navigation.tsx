@@ -62,6 +62,11 @@ export default function Navigation() {
                 Dashboard
               </Link>
             )}
+            {process.env.NODE_ENV === 'development' && (
+              <Link href="/debug" className="text-orange-600 hover:text-orange-900">
+                Debug
+              </Link>
+            )}
           </div>
 
           {/* Auth Section */}
