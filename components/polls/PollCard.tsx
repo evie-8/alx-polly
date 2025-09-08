@@ -1,14 +1,13 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { PollWithOptions } from "@/lib/types/poll";
+import { formatDistanceToNow } from "date-fns";
+import { useAuth } from "@/contexts/AuthContext";
+import { Edit, Trash2, Eye } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { PollWithOptions } from "@/lib/types/poll";
 import { formatDistanceToNow } from "date-fns";
 import { useAuth } from "@/contexts/AuthContext";
@@ -18,7 +17,11 @@ import { useRouter } from "next/navigation";
 interface PollCardProps {
   poll: PollWithOptions;
   onVote?: (pollId: string, optionIds: string[]) => void;
+  poll: PollWithOptions;
+  onVote?: (pollId: string, optionIds: string[]) => void;
   onView?: (pollId: string) => void;
+  onEdit?: (pollId: string) => void;
+  onDelete?: (pollId: string) => void;
   onEdit?: (pollId: string) => void;
   onDelete?: (pollId: string) => void;
 }
@@ -36,6 +39,7 @@ export default function PollCard({
 
   const handleVote = (optionIds: string[]) => {
     if (onVote) {
+      onVote(poll.id, optionIds);
       onVote(poll.id, optionIds);
     }
   };
@@ -89,6 +93,8 @@ export default function PollCard({
   return (
     <Card className="h-full flex flex-col">
       <CardHeader className="pb-3">
+    <Card className="h-full flex flex-col">
+      <CardHeader className="pb-3">
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <CardTitle className="text-lg leading-tight mb-2">
@@ -99,6 +105,12 @@ export default function PollCard({
                 {poll.description}
               </CardDescription>
             )}
+          </div>
+          <div className="flex items-center space-x-2 ml-4">
+            {getStatusBadge(poll.status)}
+            <Badge variant="outline" className="text-xs">
+              {getVoteTypeLabel(poll.vote_type)}
+            </Badge>
           </div>
           <div className="flex items-center space-x-2 ml-4">
             {getStatusBadge(poll.status)}
@@ -127,11 +139,19 @@ export default function PollCard({
           {poll.options.slice(0, 3).map((option) => (
             <div key={option.id} className="text-sm text-gray-700">
               • {option.text}
+
+      <CardContent className="flex-1 flex flex-col">
+        <div className="space-y-2 mb-4">
+          {poll.options.slice(0, 3).map((option) => (
+            <div key={option.id} className="text-sm text-gray-700">
+              • {option.text}
             </div>
           ))}
           {poll.options.length > 3 && (
             <div className="text-sm text-gray-500">
+            <div className="text-sm text-gray-500">
               +{poll.options.length - 3} more options
+            </div>
             </div>
           )}
         </div>
