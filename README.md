@@ -9,7 +9,7 @@ A modern, real-time polling application built with Next.js 15, TypeScript, Tailw
 - **Real-time Voting** - Vote on active polls with single or multiple choice options
 - **Dashboard** - View your polls, stats, and activity
 - **Responsive Design** - Beautiful UI that works on all devices
-- **Row Level Security** - Secure data access with Supabase RLS policies
+- **Row Level Security** - Secure data access with Supabase RLS policies 
 
 ## 🚀 Tech Stack
 
