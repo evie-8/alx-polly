@@ -7,7 +7,7 @@ You're encountering this error when trying to create a poll:
 ```
 lib/db/pollService.ts (151:15) @ PollService.createPoll
 lib/db/pollService.ts (194:13) @ PollService.createPoll
-```
+```  
 
 ## 🔍 **Root Causes & Solutions**
 
